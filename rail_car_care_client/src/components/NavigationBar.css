@@ -1,0 +1,21 @@
+/* Add this custom CSS to your component or stylesheet */
+.custom-nav {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    
+  }
+  .image-logo{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+  }
+  .brand{
+    padding-left: 50px;
+  }
+  .navigation{
+    height: 10%;
+  }
+  
