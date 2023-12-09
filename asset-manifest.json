@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/Web-dev-project/static/css/main.0e1a2b0b.css",
+    "main.js": "/Web-dev-project/static/js/main.62e9956b.js",
+    "static/js/787.6b2b84e0.chunk.js": "/Web-dev-project/static/js/787.6b2b84e0.chunk.js",
+    "static/media/bg.png": "/Web-dev-project/static/media/bg.8f1b597f1660811345c5.png",
+    "static/media/Train-Repair-1.jpg": "/Web-dev-project/static/media/Train-Repair-1.bc2d56c8990ab1031754.jpg",
+    "static/media/Train-Repair-2.jpg": "/Web-dev-project/static/media/Train-Repair-2.fd6de60a7b57e0c81353.jpg",
+    "static/media/Logo.PNG": "/Web-dev-project/static/media/Logo.d3481de9690cec38227d.PNG",
+    "static/media/Employee.png": "/Web-dev-project/static/media/Employee.e5db5ef2699df451c643.png",
+    "index.html": "/Web-dev-project/index.html",
+    "main.0e1a2b0b.css.map": "/Web-dev-project/static/css/main.0e1a2b0b.css.map",
+    "main.62e9956b.js.map": "/Web-dev-project/static/js/main.62e9956b.js.map",
+    "787.6b2b84e0.chunk.js.map": "/Web-dev-project/static/js/787.6b2b84e0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0e1a2b0b.css",
+    "static/js/main.62e9956b.js"
+  ]
+}
