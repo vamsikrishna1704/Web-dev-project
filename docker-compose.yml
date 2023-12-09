@@ -1,0 +1,16 @@
+version: "3"
+services:
+  frontend:
+    build:
+      context: ./rail_car_care_client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+  backend:
+    build:
+      context: ./rail_car_care_server
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    depends_on:
+      - frontend
