@@ -11,15 +11,18 @@ import Orders from './components/Orders';
 import Complaints from './components/Complaints';
 import Assignments from './components/Assignments';
 import EmployeePage from './components/EmployeeForm';
+import UriContext from './UriContext';
 
 
 function App() {
+  const uriValue = 'https://express-backend-mjycvennua-uc.a.run.app';
   const navigateToLogin = () => {
     window.location.href = '/';
   };
 
   return (
     <div className="App">
+      <UriContext.Provider value={uriValue}>
       <Router>
         <Routes>
           <Route path='/' element={<ComplaintPageTravelers/>}/>
@@ -34,6 +37,7 @@ function App() {
           <Route path="/create-employee" element={<EmployeePage/> }/>
         </Routes>
       </Router>
+      </UriContext.Provider>
     </div>
   );
 }

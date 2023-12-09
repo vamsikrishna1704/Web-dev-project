@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Card, CardBody } from 'react-bootstrap';
 import NavBar from './NavBar';
 import AboutUs from './AboutUs';
 import './ManagerHome.css';
 import { useNavigate } from 'react-router-dom';
+import UriContext from '../UriContext';
 
 function Complaints() {
+  const uri = useContext(UriContext);
   const navigate = useNavigate();
   const [complaints, setComplaints] = useState([]);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
@@ -14,7 +16,7 @@ function Complaints() {
   const [filterValue, setFilterValue] = useState('');
 
   const handleLogout = async () => {
-    const response = await fetch('http://localhost:3001/logout');
+    const response = await fetch(uri+'/logout');
     if (response.ok) {
       console.log('Inside logout');
       localStorage.removeItem('token');
@@ -24,7 +26,7 @@ function Complaints() {
 
   const fetchComplaints = async () => {
     try {
-      const response = await fetch('http://localhost:3001/get-complaints');
+      const response = await fetch(uri+'/get-complaints');
       if (response.ok) {
         const data = await response.json();
         setComplaints(data);
@@ -46,7 +48,7 @@ function Complaints() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3001/delete-complaint/${id}`, {
+      const response = await fetch(uri+`/delete-complaint/${id}`, {
         method: 'DELETE',
       });
       if (response.ok) {

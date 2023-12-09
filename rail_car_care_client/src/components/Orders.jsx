@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './Orders.css';
 import NavBar from './NavBar';
 import { useNavigate } from 'react-router-dom';
+import UriContext from '../UriContext';
 
 function Orders() {
+  const uri = useContext(UriContext);
   const user =localStorage.getItem('user');
   const role = localStorage.getItem('userRole');
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ function Orders() {
     const fetchOrders = async () => {
       if(role === 'manager'){
         try {
-            const response = await fetch('http://localhost:3001/get-orders');
+            const response = await fetch(uri+'/get-orders');
             if (response.ok) {
                 const data = await response.json();
                 setOrders(data); // Set the profile data including empId
@@ -34,7 +36,7 @@ function Orders() {
         }
       }else{
         try {
-          const response = await fetch('http://localhost:3001/get-orders-emp', {
+          const response = await fetch(uri+'/get-orders-emp', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -80,7 +82,7 @@ function Orders() {
   };
 
   const handleStatusChange = async(orderId, newStatus) => {
-    const response = await fetch('http://localhost:3001/update-user-assign',{
+    const response = await fetch(uri+'/update-user-assign',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -107,7 +109,7 @@ function Orders() {
       alert('Please fill out all fields with valid information, including Employee Name, Item Name, and Status.');
       return;
     }
-    const response = await fetch('http://localhost:3001/add-order',{
+    const response = await fetch(uri+'/add-order',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -130,7 +132,7 @@ function Orders() {
   const handleDelete = async(id) => {
     setOrders(orders.filter(order => order.id !== id));
     try {
-        const response = await fetch(`http://localhost:3001/delete-order/${id}`, {
+        const response = await fetch(uri+`/delete-order/${id}`, {
           method: 'DELETE',
         });
         if (response.ok) {

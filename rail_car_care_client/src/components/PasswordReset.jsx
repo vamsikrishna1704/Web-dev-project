@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Container, Button, Form, Card, Image } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../images/Logo.PNG';
 import './Login.css';
+import UriContext from '../UriContext';
 
 const PasswordResetRequest = () => {
+  const uri = useContext(UriContext);
   const navigate = useNavigate();
   const [isFlipped, setFlipped] = useState(false);
   const [formData, setFormData] = useState({
@@ -64,7 +66,7 @@ const PasswordResetRequest = () => {
     setOtpTimer(60);
 
     try {
-      const response = await fetch('http://localhost:3001/request-password-reset', {
+      const response = await fetch(uri+'/request-password-reset', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -106,7 +108,7 @@ const PasswordResetRequest = () => {
       return;
     }
 
-    const response = await fetch('http://localhost:3001/reset-password', {
+    const response = await fetch(uri+'/reset-password', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

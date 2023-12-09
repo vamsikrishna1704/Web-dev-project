@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Container, Button, Form, Card, Image } from 'react-bootstrap';
 import Logo from '../images/Logo.PNG';
 import ManagerLogo from '../images/Manager.png';
@@ -6,8 +6,10 @@ import EmployeeLogo from '../images/Employee.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
+import UriContext from '../UriContext';
 
 function LoginPage() {
+    const uri = useContext(UriContext);
     const navigate = useNavigate();
     const [isFlipped, setFlipped] = useState(false);
     const [selectedUserType, setSelectedUserType] = useState(null);
@@ -58,7 +60,7 @@ function LoginPage() {
           return;
       }
   
-          const response = await fetch('http://localhost:3001/login', {
+          const response = await fetch(uri+'/login', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',

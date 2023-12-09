@@ -5,6 +5,7 @@ import NavBar from './NavBar';
 import { useNavigate } from 'react-router-dom';
 
 const EmployeeForm = () => {
+  const uri = 'https://express-backend-mjycvennua-uc.a.run.app';
   const user = localStorage.getItem('user');
   const navigate = useNavigate();
   const [employee, setEmployee] = useState({
@@ -40,7 +41,7 @@ const EmployeeForm = () => {
 
     try {
       // Send employee data to the backend
-        const response = await fetch('http://localhost:3001/create-employee', {
+        const response = await fetch(uri+'/create-employee', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Form, Button, Navbar, Nav } from 'react-bootstrap';
 import './ComplaintPageTravelers.css';
 import { Link } from 'react-router-dom';
 import Logo from '../images/Logo.PNG';
 import './NavigationBar.css';
+import UriContext from '../UriContext';
 
 function ComplaintPageTravelers() {
+  const uri = useContext(UriContext);
   const initialFormData = {
     trainNo: '',
     coachType: '',
@@ -60,7 +62,7 @@ function ComplaintPageTravelers() {
   useEffect(() => {
     const fetchTrains = async () => {
       try {
-        const response = await fetch('http://localhost:3001/get-trains');
+        const response = await fetch(uri+'/get-trains');
         if (response.ok) {
           const data = await response.json();
           setTrains(data);
@@ -118,7 +120,7 @@ function ComplaintPageTravelers() {
       return;
     }
 
-    const response = await fetch('http://localhost:3001/submit-complaint', {
+    const response = await fetch(uri+'/submit-complaint', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -143,7 +145,7 @@ function ComplaintPageTravelers() {
     const { name, value } = e.target;
     if (value.length === 5) {
       formData.trainNo = value;
-      const data = await fetch('http://localhost:3001/get-train', {
+      const data = await fetch(uri+'/get-train', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

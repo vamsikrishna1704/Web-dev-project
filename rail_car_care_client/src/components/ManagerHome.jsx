@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Card, CardBody, Row, Col, Carousel, Image } from 'react-bootstrap';
+import { Button, Card, CardBody, Row, Col } from 'react-bootstrap';
 import NavBar from './NavBar';
 import AboutUs from './AboutUs';
 import './ManagerHome.css';
 import { useNavigate } from 'react-router-dom';
-import Img1 from '../images/Train-Repair-1.jpg';
-import Img2 from "../images/Train-Repair-2.jpg";
+import UriContext from '../UriContext';
 
 function ManagerHome() {
+  const uri = useContext(UriContext);
   const navigate = useNavigate();
   const [employees, setEmployees] = useState([]);
   const [complaints, setComplaints] = useState([]);
@@ -22,7 +22,7 @@ function ManagerHome() {
   }
 
   const handleLogout = async () => {
-    const response = await fetch('http://localhost:3001/logout');
+    const response = await fetch(uri+'/logout');
     if (response.ok) {
       console.log('Inside logout');
       localStorage.removeItem('token');
@@ -34,7 +34,7 @@ function ManagerHome() {
 
   const fetchEmployees = async () => {
     try {
-      const response = await fetch('http://localhost:3001/get-employees', {
+      const response = await fetch(uri+'/get-employees', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ function ManagerHome() {
 
   const fetchComplaints = async () => {
     try {
-      const response = await fetch('http://localhost:3001/get-complaints');
+      const response = await fetch(uri+'/get-complaints');
       if (response.ok) {
         const data = await response.json();
         setComplaints(data);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import UnassignedTasksModal from './UnassignedTasksModal';
@@ -6,10 +6,12 @@ import NavBar from './NavBar';
 import './Assignments.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
+import UriContext from '../UriContext';
 
 const AssignedTasks = () => {
   const navigate = useNavigate();
   const [assignedTasks, setAssignedTasks] = useState([]);
+  const uri = useContext(UriContext);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -18,7 +20,7 @@ const AssignedTasks = () => {
     }
     const fetchAssignedTasks = async () => {
       try {
-        const response = await fetch('http://localhost:3001/get-assigned-tasks');
+        const response = await fetch(uri+'/get-assigned-tasks');
         if (response.ok) {
           const data = await response.json();
           setAssignedTasks(data);
@@ -37,12 +39,12 @@ const AssignedTasks = () => {
     const id = task._id;
     const empId = task.empId;
     try {
-      const response = await fetch(`http://localhost:3001/delete-assignment/${id}`, {
+      const response = await fetch(uri+`/delete-assignment/${id}`, {
         method: 'DELETE',
       });
       if (response.ok) {
         alert('Assignment deleted successfully.');
-        const response = await fetch('http://localhost:3001/update-user-assign',{
+        const response = await fetch(uri+'/update-user-assign',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -111,8 +113,8 @@ const AssignOrder = () => {
     const fetchData = async () => {
       const user = localStorage.getItem('user');
       try {
-        const ordersResponse = await fetch('http://localhost:3001/get-unassigned-complaints');
-        const techniciansResponse = await fetch('http://localhost:3001/get-technicians', {
+        const ordersResponse = await fetch(uri+'/get-unassigned-complaints');
+        const techniciansResponse = await fetch(uri+'/get-technicians', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -164,7 +166,7 @@ const AssignOrder = () => {
         return;
       }
 
-      const response = await fetch('http://localhost:3001/assign-order', {
+      const response = await fetch(uri+'/assign-order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -178,7 +180,7 @@ const AssignOrder = () => {
         const compartment =assignment.compartment;
         const status = 'assigned';
         alert('Order assigned successfully.');
-        const resp = await fetch('http://localhost:3001/update-complaint-assign',{
+        const resp = await fetch(uri+'/update-complaint-assign',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -186,7 +188,7 @@ const AssignOrder = () => {
         body: JSON.stringify({'trainNo': trainNo,'compartment': compartment, 'status': status}),
       });
 
-        const response = await fetch('http://localhost:3001/update-user-assign',{
+        const response = await fetch(uri+'/update-user-assign',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -211,7 +213,7 @@ const AssignOrder = () => {
 
   const fetchUnassignedOrders = async () => {
     try {
-      const response = await fetch('http://localhost:3001/get-unassigned-complaints');
+      const response = await fetch(uri+'/get-unassigned-complaints');
 
       if (response.ok) {
         const data = await response.json();
