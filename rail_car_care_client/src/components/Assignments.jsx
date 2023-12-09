@@ -97,6 +97,7 @@ const AssignedTasks = () => {
 };
 
 const AssignOrder = () => {
+  const uri = useContext(UriContext);
   const [unassignedOrders, setUnassignedOrders] = useState([]);
   const [technicians, setTechnicians] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState('');
